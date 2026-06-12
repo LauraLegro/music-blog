@@ -1,14 +1,14 @@
 import express from "express";
 import serverless from "serverless-http";
-import postsRouter from "../../routes/posts.js";
 import path from "path";
+import postsRouter from "../../routes/posts.js";
 
 const app = express();
 
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.resolve("public")));
+app.use(express.static(path.resolve(process.cwd(), "public")));
 app.set("view engine", "ejs");
-app.set("views", path.resolve("views"));
+app.set("views", path.resolve(process.cwd(), "views"));
 
 app.use("/posts", postsRouter);
 
