@@ -1,5 +1,9 @@
 import express from "express";
 import postsRouter from "./routes/posts.js";
+import { fileURLToPath } from "url";
+import path from "path";
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 const PORT = 3000;
