@@ -1,13 +1,13 @@
 // netlify/functions/api.js  ← put the file here!
 
-const express = require("express");
-const serverless = require("serverless-http");
-const postsRouter = require("../../routes/posts.js"); // adjust path as needed
+import express, { urlencoded, static } from "express";
+import serverless from "serverless-http";
+import postsRouter from "../../routes/posts.js"; // adjust path as needed
 
 const app = express();
 
-app.use(express.urlencoded({ extended: true }));
-app.use(express.static("public"));
+app.use(urlencoded({ extended: true }));
+app.use(static("public"));
 
 app.set("view engine", "ejs");
 
@@ -31,13 +31,13 @@ app.post("/contact", (req, res) => {
   res.render("contact", { success: true });
 });
 
-// Export for Netlify — no app.listen()
-module.exports.handler = serverless(app);
+export const handler = serverless(app);
 
 // Export for local testing
-module.exports.app = app;
+const _app = app;
+export { _app as app };
 
 // Export for local testing
-module.exports.run = (event, context) => {
+export function run(event, context) {
   return serverless(app)(event, context);
-};
+}
