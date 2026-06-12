@@ -2,6 +2,7 @@
 
 import express, { urlencoded, static } from "express";
 import serverless from "serverless-http";
+export const handler = serverless(app);
 import postsRouter from "../../routes/posts.js"; // adjust path as needed
 
 const app = express();
@@ -30,8 +31,6 @@ app.post("/contact", (req, res) => {
   console.log(`Contact form submitted: ${name} (${email}) - ${message}`);
   res.render("contact", { success: true });
 });
-
-export const handler = serverless(app);
 
 // Export for local testing
 const _app = app;
