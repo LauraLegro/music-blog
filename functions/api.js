@@ -1,10 +1,10 @@
-import express from "express";
-import postsRouter from "./routes/posts.js";
-const serverless = require("serverless-http");
-const app = express();
-const router = express.Router();
+// netlify/functions/api.js  ← put the file here!
 
-const PORT = 3000;
+const express = require("express");
+const serverless = require("serverless-http");
+const postsRouter = require("../../routes/posts.js"); // adjust path as needed
+
+const app = express();
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
@@ -16,10 +16,7 @@ app.use("/posts", postsRouter);
 app.get("/", (req, res) => {
   res.render("index");
 });
-// Define your backend routes here
-router.get("/routes/posts.js", (req, res) => {
-  res.json({ message: "Hello from your Express backend on Netlify!" });
-});
+
 app.get("/about", (req, res) => {
   res.render("about");
 });
@@ -34,16 +31,13 @@ app.post("/contact", (req, res) => {
   res.render("contact", { success: true });
 });
 
-// app.listen(PORT, () => {
-//   console.log(`Music blog running on port ${PORT}`);
-// });
-
-export default app;
-
-// const express = require("express");
-
-// CRITICAL: Path prefix must match your function name or redirect rule
-app.use("/.netlify/functions/api", router);
-
-// DO NOT USE app.listen(). Instead, export the wrapped handler:
+// Export for Netlify — no app.listen()
 module.exports.handler = serverless(app);
+
+// Export for local testing
+module.exports.app = app;
+
+// Export for local testing
+module.exports.run = (event, context) => {
+  return serverless(app)(event, context);
+};

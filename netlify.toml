@@ -1,7 +1,8 @@
 [build]
-  functions = "functions"
+  command = "npm run build"   # or whatever your build command is
+  publish = "public"          # your static assets folder
 
 [[redirects]]
   from = "/*"
-  to = "/.netlify/functions/api"
+  to = "/.netlify/functions/api/:splat"
   status = 200
