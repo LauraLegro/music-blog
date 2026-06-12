@@ -10,9 +10,6 @@ const __dirname = path.dirname(__filename);
 
 const app = express();
 
-app.use(urlencoded({ extended: true }));
-app.use(static("public"));
-
 app.set("view engine", "ejs");
 
 app.use("/posts", postsRouter);
