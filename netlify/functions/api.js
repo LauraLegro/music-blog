@@ -36,11 +36,11 @@ app.post("/contact", (req, res) => {
 });
 
 // Export for local testing
-const _app = app;
-export { _app as app };
+// const _app = app;
+// export { _app as app };
 
-// Export for local testing
-export function run(event, context) {
-  return serverless(app)(event, context);
-}
+// // Export for local testing
+// export function run(event, context) {
+//   return serverless(app)(event, context);
+// }
 export const handler = serverless(app);
