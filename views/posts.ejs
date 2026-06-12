@@ -1,0 +1,40 @@
+<%- include('partials/header') %>
+    <main>
+        <div
+            style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem; flex-wrap:wrap; gap:1rem;">
+            <h1>All Posts</h1>
+            <a href="/posts/new" class="btn btn-primary">+ New Post</a>
+        </div>
+
+        <% if (posts.length===0) { %>
+            <div class="empty">
+                <p>No posts yet.</p>
+                <a href="/posts/new" class="btn btn-outline">Write your first post</a>
+            </div>
+            <% } else { %>
+                <div class="posts-grid">
+                    <% posts.forEach(post=> { %>
+                        <div class="card">
+                            <div class="card-meta">
+                                <span class="tag">
+                                    <%= post.category %>
+                                </span>
+                                <span class="tag">
+                                    <%= post.tag %>
+                                </span>
+                            </div>
+                            <h2><a href="/posts/<%= post.id %>">
+                                    <%= post.title %>
+                                </a></h2>
+                            <p class="card-excerpt">
+                                <%= post.body.substring(0, 100) %>...
+                            </p>
+                            <span class="card-date">
+                                <%= post.date %>
+                            </span>
+                        </div>
+                        <% }) %>
+                </div>
+                <% } %>
+    </main>
+    <%- include('partials/footer') %>

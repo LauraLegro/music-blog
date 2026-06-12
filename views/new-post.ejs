@@ -1,0 +1,35 @@
+<%- include('partials/header') %>
+    <main>
+        <div class="form-card">
+            <h1>New Post</h1>
+            <form action="/posts" method="POST">
+                <div class="form-group">
+                    <label for="title">Title</label>
+                    <input type="text" id="title" name="title" placeholder="Post title" required>
+                </div>
+                <div class="form-group">
+                    <label for="category">Category</label>
+                    <select id="category" name="category">
+                        <option>Review</option>
+                        <option>Artist Spotlight</option>
+                        <option>Genre Deep-Dive</option>
+                        <option>Music History</option>
+                        <option>Production</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="tag">Tag</label>
+                    <input type="text" id="tag" name="tag" placeholder="e.g. Jazz, Hip-Hop, Indie">
+                </div>
+                <div class="form-group">
+                    <label for="body">Content</label>
+                    <textarea id="body" name="body" placeholder="Write your post..." required></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Publish</button>
+                    <a href="/posts" class="btn btn-outline">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </main>
+    <%- include('partials/footer') %>
