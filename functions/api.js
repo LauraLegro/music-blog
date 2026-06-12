@@ -1,9 +1,12 @@
 // netlify/functions/api.js  ← put the file here!
 
-import express, { urlencoded, static } from "express";
+import express from "express";
 import serverless from "serverless-http";
-export const handler = serverless(app);
 import postsRouter from "../../routes/posts.js"; // adjust path as needed
+import { fileURLToPath } from "url";
+import path from "path";
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 
@@ -40,3 +43,4 @@ export { _app as app };
 export function run(event, context) {
   return serverless(app)(event, context);
 }
+export const handler = serverless(app);
